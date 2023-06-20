@@ -7,59 +7,39 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadedFileInfo implements FileInfoInterface
 {
-    private $uploadedFile;
-
-    public function __construct(UploadedFile $uploadedFile)
+    public function __construct(private readonly UploadedFile $uploadedFile)
     {
-        $this->uploadedFile = $uploadedFile;
     }
 
-    /**
-     * @return ?string
-     */
-    public function getTmpName()
+    public function getTmpName(): ?string
     {
         return $this->uploadedFile->getPathname();
     }
 
-    /**
-     * @return ?string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->uploadedFile->getClientOriginalName();
     }
 
-    /**
-     * @return ?string
-     */
-    public function getSize()
+    public function getSize(): ?string
     {
         return $this->uploadedFile->getSize();
     }
 
-    /**
-     * @return ?string
-     */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->uploadedFile->getMimeType();
     }
 
-    /**
-     * @return int
-     */
-    public function getError()
+    public function getError(): int
     {
         return $this->uploadedFile->getError();
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @return bool
      */
-    public function isUploadedFile()
+    public function isUploadedFile(): bool
     {
         return is_uploaded_file($this->uploadedFile->getPathname());
     }

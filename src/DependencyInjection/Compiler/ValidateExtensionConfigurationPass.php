@@ -16,12 +16,8 @@ class ValidateExtensionConfigurationPass implements CompilerPassInterface
      * This validation runs in a discrete compiler pass because it depends on
      * DBAL and ODM services, which aren't available during the config merge
      * compiler pass.
-     *
-     * @param ContainerBuilder $container
-     *
-     * @return void
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $container->getExtension('stof_doctrine_extensions')->configValidate($container);
     }

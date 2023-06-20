@@ -1,3 +1,8 @@
+## 2.0.0 (2023-06-20)
+
+* Dropped support for unmaintained versions of Symfony. The minimum Symfony versions are now 5.4 and 6.2.
+* Dropped support for PHP < 8.2.
+
 ## 1.7.0 (2021-11-22)
 
 Features:

@@ -28,7 +28,7 @@ form is valid, do the following::
         return $this->redirect($this->generateUrl('...'));
     }
 
-    return $this->render('...', array('form' => $form->createView()));
+    return $this->render('...', ['form' => $form->createView()]);
 
 And that's it. The Uploadable extension handles the rest of the stuff. Remember
 to read its documentation!
