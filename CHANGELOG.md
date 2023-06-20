@@ -1,5 +1,6 @@
 ## 2.0.0 (2023-06-20)
 
+* Change config-format from xml to php
 * Dropped support for unmaintained versions of Symfony. The minimum Symfony versions are now 5.4 and 6.2.
 * Dropped support for PHP < 8.2.
 

@@ -32,3 +32,4 @@ disable the filter. Here is an example::
 
     $filters = $em->getFilters();
     $filters->disable('softdeleteable');
+
