@@ -5,6 +5,7 @@ This bundle provides integration for
 your Symfony 5+ Project.
 
 [![CI](https://github.com/Dukecity/DoctrineExtensionsBundle/actions/workflows/ci.yml/badge.svg)](https://github.com/Dukecity/DoctrineExtensionsBundle/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/Dukecity/DoctrineExtensionsBundle/branch/main/graph/badge.svg?token=o6sgVtRE3s)](https://codecov.io/gh/Dukecity/DoctrineExtensionsBundle)
 [![Total Downloads](https://poser.pugx.org/dukecity/doctrine-extensions-bundle/downloads.png)](https://packagist.org/packages/dukecity/doctrine-extensions-bundle)
 [![Latest Stable Version](https://poser.pugx.org/dukecity/doctrine-extensions-bundle/v/stable.png)](https://packagist.org/packages/dukecity/doctrine-extensions-bundle)
 
