@@ -11,13 +11,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class StofDoctrineExtensionsExtension extends Extension
 {
-    private $entityManagers   = array();
-    private $documentManagers = array();
+    private array $entityManagers   = [];
+    private array $documentManagers = [];
 
     /**
-     * @return void
+     * @throws \Exception
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -26,7 +26,7 @@ class StofDoctrineExtensionsExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loaded = array();
+        $loaded = [];
 
         $this->entityManagers = $this->processObjectManagerConfigurations($config['orm'], $container, $loader, $loaded, 'doctrine.event_subscriber');
         $this->documentManagers = $this->processObjectManagerConfigurations($config['mongodb'], $container, $loader, $loaded, 'doctrine_mongodb.odm.event_subscriber');
@@ -49,7 +49,7 @@ class StofDoctrineExtensionsExtension extends Extension
 
             if ($uploadableConfig['default_file_path']) {
                 $container->getDefinition('stof_doctrine_extensions.listener.uploadable')
-                    ->addMethodCall('setDefaultPath', array($uploadableConfig['default_file_path']));
+                    ->addMethodCall('setDefaultPath', [$uploadableConfig['default_file_path']]);
             }
 
             if ($uploadableConfig['mime_type_guesser_class']) {
@@ -74,7 +74,7 @@ class StofDoctrineExtensionsExtension extends Extension
     /**
      * @internal
      */
-    public function configValidate(ContainerBuilder $container)
+    public function configValidate(ContainerBuilder $container): void
     {
         foreach ($this->entityManagers as $name) {
             if (!$container->hasDefinition(sprintf('doctrine.dbal.%s_connection', $name))) {
@@ -90,23 +90,24 @@ class StofDoctrineExtensionsExtension extends Extension
     }
 
     /**
-     * @param array            $configs
+     * @param array $configs
      * @param ContainerBuilder $container
-     * @param LoaderInterface  $loader
-     * @param array            $loaded
-     * @param string           $doctrineSubscriberTag
+     * @param LoaderInterface $loader
+     * @param array $loaded
+     * @param string $doctrineSubscriberTag
      *
      * @return array
+     * @throws \Exception
      */
-    private function processObjectManagerConfigurations(array $configs, ContainerBuilder $container, LoaderInterface $loader, array &$loaded, $doctrineSubscriberTag)
+    private function processObjectManagerConfigurations(array $configs, ContainerBuilder $container, LoaderInterface $loader, array &$loaded, string $doctrineSubscriberTag): array
     {
-        $usedManagers = array();
+        $usedManagers = [];
 
-        $listenerPriorities = array(
+        $listenerPriorities = [
             'translatable' => -10,
             'loggable' => 5,
             'uploadable' => -5,
-        );
+        ];
 
         foreach ($configs as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
@@ -119,7 +120,7 @@ class StofDoctrineExtensionsExtension extends Extension
                     $loaded[$ext] = true;
                 }
 
-                $attributes = array('connection' => $name);
+                $attributes = ['connection' => $name];
 
                 if (isset($listenerPriorities[$ext])) {
                     $attributes['priority'] = $listenerPriorities[$ext];

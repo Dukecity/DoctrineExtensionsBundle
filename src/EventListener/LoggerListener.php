@@ -17,23 +17,17 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class LoggerListener implements EventSubscriberInterface
 {
-    private $authorizationChecker;
-    private $tokenStorage;
-    private $loggableListener;
-
-    public function __construct(LoggableListener $loggableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
-    {
-        $this->loggableListener = $loggableListener;
-        $this->tokenStorage = $tokenStorage;
-        $this->authorizationChecker = $authorizationChecker;
-    }
+    public function __construct(private readonly LoggableListener               $loggableListener,
+                                private readonly ?TokenStorageInterface         $tokenStorage = null,
+                                private readonly ?AuthorizationCheckerInterface $authorizationChecker = null)
+    {}
 
     /**
      * @internal
      */
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
-        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
+        if (HttpKernelInterface::MAIN_REQUEST !== $event->getRequestType()) {
             return;
         }
 
@@ -51,10 +45,10 @@ class LoggerListener implements EventSubscriberInterface
     /**
      * @return string[]
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
-        return array(
+        return [
             KernelEvents::REQUEST => 'onKernelRequest',
-        );
+        ];
     }
 }

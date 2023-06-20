@@ -9,8 +9,7 @@ to register their mapping in Doctrine when you want to use them.
 
 .. code-block:: yaml
 
-    # app/config/config.yml
-    # (or config/packages/doctrine.yaml if you use Flex)
+    # config/packages/doctrine.yaml
     doctrine:
         orm:
             entity_managers:

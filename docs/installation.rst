@@ -10,7 +10,7 @@ download, register and configure the bundle automatically:
 
 .. code-block:: terminal
 
-    $ composer require stof/doctrine-extensions-bundle
+    $ composer require dukecity/doctrine-extensions-bundle
 
 That's all! You can skip the rest of this article.
 
@@ -33,28 +33,18 @@ in the `installation chapter`_ of the Composer documentation.
 Step 2: Enable the Bundle
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Then, enable the bundle by adding the following line in the ``app/AppKernel.php``
+Then, enable the bundle by adding the following line in the ``config/bundles.php``
 file of your project:
 
 .. code-block:: php
 
-    // app/AppKernel.php
+    // config/bundles.php
 
-    class AppKernel extends Kernel
-    {
-        public function registerBundles()
-        {
-            $bundles = array(
+    return [
                 // ...
 
-                new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            );
-
-            // ...
-        }
-
-        // ...
-    }
+                Dukecity\DoctrineExtensionsBundle\DoctrineExtensionsBundle::class => ['all' => true],
+    ];
 
 .. _`Symfony Flex`: https://symfony.com/doc/current/setup/flex.html
 .. _`installation chapter`: https://getcomposer.org/doc/00-intro.md
