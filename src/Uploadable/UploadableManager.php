@@ -21,7 +21,7 @@ class UploadableManager
      */
     public function markEntityToUpload(object $entity, mixed $fileInfo): void
     {
-        if (is_object($fileInfo) && $fileInfo instanceof UploadedFile) {
+        if ($fileInfo instanceof UploadedFile) {
             $fileInfoClass = $this->fileInfoClass;
 
             $fileInfo = new $fileInfoClass($fileInfo);

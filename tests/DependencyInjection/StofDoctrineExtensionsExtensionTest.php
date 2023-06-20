@@ -8,6 +8,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class StofDoctrineExtensionsExtensionTest extends TestCase
 {
+    /**
+     * @return string[]
+     */
     public static function provideExtensions(): array
     {
         return [
@@ -27,7 +30,7 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
     /**
      * @dataProvider provideExtensions
      */
-    public function testLoadORMConfig($listener): void
+    public function testLoadORMConfig(string $listener): void
     {
         $extension = new StofDoctrineExtensionsExtension();
         $container = new ContainerBuilder();
@@ -53,7 +56,7 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
     /**
      * @dataProvider provideExtensions
      */
-    public function testLoadMongodbConfig($listener): void
+    public function testLoadMongodbConfig(string $listener): void
     {
         $extension = new StofDoctrineExtensionsExtension();
         $container = new ContainerBuilder();
@@ -79,7 +82,7 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
     /**
      * @dataProvider provideExtensions
      */
-    public function testLoadBothConfig($listener): void
+    public function testLoadBothConfig(string $listener): void
     {
         $extension = new StofDoctrineExtensionsExtension();
         $container = new ContainerBuilder();
