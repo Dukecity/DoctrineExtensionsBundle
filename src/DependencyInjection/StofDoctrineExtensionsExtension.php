@@ -106,6 +106,8 @@ class StofDoctrineExtensionsExtension extends Extension
         $listenerPriorities = [
             'translatable' => -10,
             'loggable' => 5,
+            'timestampable' => 10,
+            'blameable' => 10,
             'uploadable' => -5,
         ];
 
