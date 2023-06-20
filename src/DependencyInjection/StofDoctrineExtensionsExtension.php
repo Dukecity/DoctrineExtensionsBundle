@@ -3,9 +3,9 @@
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -24,7 +24,7 @@ class StofDoctrineExtensionsExtension extends Extension
 
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loaded = [];
 
@@ -116,7 +116,7 @@ class StofDoctrineExtensionsExtension extends Extension
                 }
 
                 if (!isset($loaded[$ext])) {
-                    $loader->load($ext.'.xml');
+                    $loader->load($ext.'.php');
                     $loaded[$ext] = true;
                 }
 
