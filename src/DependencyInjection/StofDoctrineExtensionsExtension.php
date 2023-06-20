@@ -109,12 +109,17 @@ class StofDoctrineExtensionsExtension extends Extension
         $listenerPriorities = [
             'translatable' => -10,
             'loggable' => 5,
+
+            # TODO check if this is a good new default
+            #'timestampable' => 10,
+            #'blameable' => 10,
+
             'uploadable' => -5,
         ];
 
         foreach ($configs as $name => $listeners) {
-            foreach ($listeners as $ext => $enabled) {
-                if (!$enabled) {
+            foreach ($listeners as $ext => $settingValue) {
+                if (false === $settingValue) {
                     continue;
                 }
 
@@ -127,6 +132,11 @@ class StofDoctrineExtensionsExtension extends Extension
 
                 if (isset($listenerPriorities[$ext])) {
                     $attributes['priority'] = $listenerPriorities[$ext];
+                }
+
+                # overwrite ListenerPriorities if they are numeric (instead of bool values)
+                if (is_numeric($settingValue)) {
+                    $attributes['priority'] = $settingValue;
                 }
 
                 $definition = $container->getDefinition(sprintf('stof_doctrine_extensions.listener.%s', $ext));
