@@ -23,9 +23,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ->args([
                 new ReferenceConfigurator('stof_doctrine_extensions.uploadable.mime_type_guesser'),
             ])
-            ->call('setAnnotationReader', [new ReferenceConfigurator('annotation_reader')])
+            ->call('setCacheItemPool', [new ReferenceConfigurator('stof_doctrine_extensions.metadata_cache')])
+            ->call('setAnnotationReader', [(new ReferenceConfigurator('annotation_reader'))->ignoreOnInvalid()])
             ->call('setDefaultFileInfoClass', ['%stof_doctrine_extensions.uploadable.default_file_info.class%'])
-            ->factory([new ReferenceConfigurator('stof_doctrine_extensions.uploadable.configurator'), 'configure'])
 
         ->set('stof_doctrine_extensions.uploadable.mime_type_guesser', '%stof_doctrine_extensions.uploadable.mime_type_guesser.class%')
 

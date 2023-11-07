@@ -13,6 +13,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $containerConfigurator->services()
         ->set('stof_doctrine_extensions.listener.tree', '%stof_doctrine_extensions.listener.tree.class%')
-            ->call('setAnnotationReader', [new ReferenceConfigurator('annotation_reader')])
+            ->call('setCacheItemPool', [new ReferenceConfigurator('stof_doctrine_extensions.metadata_cache')])
+            ->call('setAnnotationReader', [(new ReferenceConfigurator('annotation_reader'))->ignoreOnInvalid()])
     ;
 };

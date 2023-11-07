@@ -15,7 +15,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $containerConfigurator->services()
         ->set('stof_doctrine_extensions.listener.blameable', '%stof_doctrine_extensions.listener.blameable.class%')
-            ->call('setAnnotationReader', [new ReferenceConfigurator('annotation_reader')])
+            ->call('setCacheItemPool', [new ReferenceConfigurator('stof_doctrine_extensions.metadata_cache')])
+            ->call('setAnnotationReader', [(new ReferenceConfigurator('annotation_reader'))->ignoreOnInvalid()])
 
         ->set('stof_doctrine_extensions.event_listener.blame', '%stof_doctrine_extensions.event_listener.blame.class%')
             ->tag('kernel.event_subscriber')
