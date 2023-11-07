@@ -38,10 +38,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('translation_fallback')->defaultFalse()->end()
                 ->booleanNode('persist_default_translation')->defaultFalse()->end()
                 ->booleanNode('skip_translation_on_load')->defaultFalse()->end()
-                ->scalarNode('metadata_cache_pool')
-                    #->defaultValue('stof_doctrine_extensions.cache.pool.array')
-                    ->defaultNull()
-                ->end()
+                ->scalarNode('metadata_cache_pool')->defaultNull()->end()
             ->end()
         ;
 

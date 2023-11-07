@@ -15,6 +15,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services
         ->set('stof_doctrine_extensions.listener.reference_integrity', '%stof_doctrine_extensions.listener.reference_integrity.class%')
-            ->call('setAnnotationReader', [new ReferenceConfigurator('annotation_reader')])
+            ->call('setCacheItemPool', [new ReferenceConfigurator('stof_doctrine_extensions.metadata_cache')])
+            ->call('setAnnotationReader', [(new ReferenceConfigurator('annotation_reader'))->ignoreOnInvalid()])
     ;
 };

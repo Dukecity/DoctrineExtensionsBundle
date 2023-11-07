@@ -13,36 +13,36 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class StofDoctrineExtensionsExtension extends Extension
 {
-    private const LISTENER_EVENTS = array(
-        'blameable' => array(
+    private const LISTENER_EVENTS = [
+        'blameable' => [
             'prePersist',
             'onFlush',
             'loadClassMetadata',
-        ),
-        'ip_traceable' => array(
+        ],
+        'ip_traceable' => [
             'prePersist',
             'onFlush',
             'loadClassMetadata',
-        ),
-        'loggable' => array(
+        ],
+        'loggable' => [
             'loadClassMetadata',
             'onFlush',
             'postPersist',
-        ),
-        'reference_integrity' => array(
+        ],
+        'reference_integrity' => [
             'loadClassMetadata',
             'preRemove',
-        ),
-        'sluggable' => array(
+        ],
+        'sluggable' => [
             'prePersist',
             'onFlush',
             'loadClassMetadata',
-        ),
-        'softdeleteable' => array(
+        ],
+        'softdeleteable' => [
             'loadClassMetadata',
             'onFlush',
-        ),
-        'sortable' => array(
+        ],
+        'sortable' => [
             'onFlush',
             'loadClassMetadata',
             'prePersist',
@@ -50,20 +50,20 @@ class StofDoctrineExtensionsExtension extends Extension
             'preUpdate',
             'postRemove',
             'postFlush',
-        ),
-        'timestampable' => array(
+        ],
+        'timestampable' => [
             'prePersist',
             'onFlush',
             'loadClassMetadata',
-        ),
-        'translatable' => array(
+        ],
+        'translatable' => [
             'postLoad',
             'postPersist',
             'preFlush',
             'onFlush',
             'loadClassMetadata',
-        ),
-        'tree' => array(
+        ],
+        'tree' => [
             'prePersist',
             'preRemove',
             'preUpdate',
@@ -72,14 +72,14 @@ class StofDoctrineExtensionsExtension extends Extension
             'postPersist',
             'postUpdate',
             'postRemove',
-        ),
-        'uploadable' => array(
+        ],
+        'uploadable' => [
             'loadClassMetadata',
             'preFlush',
             'onFlush',
             'postFlush',
-        ),
-    );
+        ],
+    ];
 
     private array $entityManagers   = [];
     private array $documentManagers = [];
